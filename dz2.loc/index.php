@@ -75,3 +75,85 @@ class Article
 }
 $article = new Article('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi ab impedit suscipit odit? Adipisci labore quos culpa recusandae fugit a architecto ut quidem ad suscipit nisi vitae vel, nesciunt natus.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi ab impedit suscipit odit? Adipisci labore quos culpa recusandae fugit a architecto ut quidem ad suscipit nisi vitae vel, nesciunt natus.', ['description' => 'Lorem hhh kkk lll', 'says' => ['kkk'], 'replacement' => '***'], 'david area value');
 echo $article->getArticle();
+//
+class Cons
+{
+	public const  MYPI = 3.14;
+	protected const MYPI2 = 3.15;
+	private const MYPI3 = 3.16;
+
+	public function __construct()
+	{
+		$this->getConstMy();
+	}
+
+	public static function getConst()
+	{
+		self::MYPI;
+	}
+
+	public function getConstMy()
+	{
+		self::MYPI3;
+	}
+
+	function __destruct()
+	{
+		print "Уничтожается " . __CLASS__  . "\n";
+	}
+}
+//
+class Cybertournament
+{
+	private const NAME = 'Клоуны';
+	private $listPlayer = [['gameNik' => 'Mr.Hide', 'name' => 'Serg']];
+	private $listPlayerFullName = ['Mr.Hide' => ['name' => 'Serg', 'surName' => 'Look', 'patronymic' => 'Victorovich']];
+
+	public function getName() : mixed
+	{
+		return self::NAME;
+	}
+
+	public function getListPlayer() : array
+	{
+		return $this->listPlayer;
+	}
+
+	public function getListPlayerFullName() : array
+	{
+		return $this->listPlayerFullName;
+	}
+}
+
+class Gamer
+{
+	private $dataGamer = [
+		'name' => 'Serg',
+		'surName' => 'Look',
+		'patronymic' => 'Victorovich',
+		'gameNik' => 'Mr.Hide',
+	];
+	private $keyDataGamer = [
+		'Ф' => 'surName',
+		'И' => 'name',
+		'О' => 'patronymic',
+		'ник' => 'gameNik',
+	];
+	private $rezult;
+
+	public function getDataGamer(string $dataSort) : string
+	{
+		$dataSort = explode(' ', $dataSort);
+		foreach ($dataSort  as &$value) {
+			if(array_key_exists($value, $this->keyDataGamer)) {
+				$this->rezult .= $this->dataGamer[$this->keyDataGamer[$value]] . " ";
+			} else {
+				continue;
+			}
+		}
+		return $this->rezult;
+	}
+}
+
+$gamer = new Gamer();
+echo $gamer->getDataGamer("Ф И О - ник");
