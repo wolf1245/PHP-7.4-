@@ -22,7 +22,7 @@ final class SerelizeJSON
 
 	public function setData(object $name)
 	{
-		$this->data = json_encode(serialize($name));
+		$this->data = serialize(json_encode($name));
 	}
 
 	public function getData() : string
